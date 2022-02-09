@@ -4,13 +4,16 @@ isFullTime=1
 isPartTime=2
 
 wage=30
-hrs=0
+totalWorkinghrs=0
 totalSalary=0
 maxworkingday=20
-
-for (( days=1; days<=$maxworkingday; days++ ))
+maxWorkinghrs=100
+totalWorkingdays=0
+#for (( days=1; days<=$maxworkingday; days++ ))
 # Case Statement
+while [[ $totalWorkinghrs -lt $maxWorkinghrs && $totalWorkingdays -le $maxworkingday ]]
 do
+	((totalWorkingdays++))
 	randcheck=$((RANDOM%3))
 
 	case $randcheck in 
@@ -21,13 +24,15 @@ do
 					 *) emphrs=0
 						;;
 	esac 
-	hrs=$(($hrs+$emphrs))
+	totalWorkinghrs=$(($totalWorkinghrs+$emphrs))
 	salary=$(($wage*$emphrs))
 	totalSalary=$(($totalSalary+$salary))
 done
 
-echo "Hours Worked: " $hrs
+echo "Hours Worked: " $totalWorkinghrs
 echo "Monthly Salary is: " $totalSalary
+
+
 #if [ $isPresent -eq $randcheck ]
 #then
 #	echo Present

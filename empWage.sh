@@ -10,7 +10,7 @@ maxworkingday=20
 maxWorkinghrs=100
 totalWorkingdays=0
 #for (( days=1; days<=$maxworkingday; days++ ))
-# Case Statement
+declare -A dailyWage
 
 function getWorkinghr() {
 
@@ -38,19 +38,14 @@ do
 	totalWorkinghrs=$(($totalWorkinghrs+$emphrs))
 	salary=$(($wage*$emphrs))
 	totalSalary=$(($totalSalary+$salary))
-	dailyWage[$totalWorkingdays]=$( getEmpWagePerDay $emphrs )
+	dailyWage["Day "$totalWorkingdays]=$( getEmpWagePerDay $emphrs )
+done
+
+for ((day=1;day<=20;day++))
+do 
+	echo Day$day : ${dailyWage[Day $day]}
 done
 
 echo "Hours Worked: " $totalWorkinghrs
 echo "Monthly Salary is: " $totalSalary
-echo "Daily Wage: " ${dailyWage[@]}
-
-#if [ $isPresent -eq $randcheck ]
-#then
-#	echo Present
-#	salary=$(($wage*$isFulltime))
-#	echo He gets:  $salary
-#else
-#	echo Absent!! He gets nothing. Lol!	
-#fi
 

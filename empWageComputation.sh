@@ -1,21 +1,50 @@
 #!/bin/bash 
 
-echo 'Welcome to Employee Wage Computation Program'
+isPresent=$((RANDOM%3))
+wage=20
+isFullTime=1
+isPartTime=2
+wage=20
+totalWorkinghrs=0
+maxWorkinghrs=100
+totalWorkingdays=0
+maxworkingday=20
+declare -A dailyWage
 
-#!/bin/bash 
+function getWorkinghr() {
+	case $1 in
+   	   $isFullTime) 
+					emphrs=8
+						;;
+		$isPartTime) 
+					emphrs=4
+						;;
+		*)	
+					emphrs=0
+						;;
+	esac 
+	echo $emphrs
+}
 
-isPresent=1
-randcheck=$((RANDOM%2))
-wage=30
-isFulltime=$((RANDOM%9))
+function getEmpWagePerDay(){
+	echo $(($1 * $wage))
+}
 
-if [ $isPresent -eq $randcheck ]
-then
-	salary=$(($wage*$isFulltime))
-	echo "He is Present. He gets: " $salary
-else
-	echo "Absent!! He gets nothing. Lol!"	
-fi
+while [ $totalWorkinghrs -le $maxWorkinghrs ] && [ $totalWorkingdays -lt $maxworkingday ]
+do
+	((totalWorkingdays++))
+	randcheck=$((RANDOM%3))
+	emphrs=$( getWorkinghr $randcheck )
+	totalWorkinghrs=$(($totalWorkinghrs+$emphrs))
+	salary=$(($wage*$emphrs))
+	totalSalary=$(($totalSalary+$salary))
+	dailyWage["Day "$totalWorkingdays]=$( getEmpWagePerDay $emphrs )
+done
 
+for ((day=1;day<=20;day++))
+do 
+	echo Day$day : ${dailyWage[Day $day]}
+done
 
-#YOLO kjsandkjasnkl
+echo "Hours Worked: " $totalWorkinghrs
+echo "Monthly Salary is: " $totalSalary

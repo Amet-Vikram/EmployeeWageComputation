@@ -1,21 +1,21 @@
 #!/bin/bash 
 
-echo 'Welcome to Employee Wage Computation Program'
+isPresent=$((RANDOM%3))
 
-#!/bin/bash 
+wage=20
 
-isPresent=1
-randcheck=$((RANDOM%2))
-wage=30
-isFulltime=$((RANDOM%9))
-
-if [ $isPresent -eq $randcheck ]
+if [ $isPresent -eq 0 ]
 then
-	salary=$(($wage*$isFulltime))
-	echo "He is Present. He gets: " $salary
+	echo "Employee is absent";
+	workingHour=0;
+elif [ $isPresent -eq 1 ]
+then
+	echo "Employee is present";
+	workingHour=8;
 else
-	echo "Absent!! He gets nothing. Lol!"	
+	echo "Employee is working as part time";
+	workingHour=4;
 fi
 
-
-#YOLO kjsandkjasnkl
+salary=$(($workingHour*$wage))
+echo "His Salary for the Day is: " $salary

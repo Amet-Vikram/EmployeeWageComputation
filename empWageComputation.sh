@@ -16,3 +16,6 @@ then
 else
 	echo "Absent!! He gets nothing. Lol!"	
 fi
+
+
+#YOLO kjsandkjasnkl

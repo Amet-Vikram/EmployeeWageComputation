@@ -9,6 +9,7 @@ totalWorkinghrs=0
 maxWorkinghrs=100
 totalWorkingdays=0
 maxworkingday=20
+declare -A dailyWage
 
 function getWorkinghr() {
 	case $1 in
@@ -37,8 +38,13 @@ do
 	totalWorkinghrs=$(($totalWorkinghrs+$emphrs))
 	salary=$(($wage*$emphrs))
 	totalSalary=$(($totalSalary+$salary))
-	dailyWage[$totalWorkingdays]=$( getEmpWagePerDay $emphrs )
+	dailyWage["Day "$totalWorkingdays]=$( getEmpWagePerDay $emphrs )
 done
+
+for ((day=1;day<=20;day++))
+do 
+	echo Day$day : ${dailyWage[Day $day]}
+done
+
 echo "Hours Worked: " $totalWorkinghrs
 echo "Monthly Salary is: " $totalSalary
-echo "Daily Wages: " ${dailyWage[@]}

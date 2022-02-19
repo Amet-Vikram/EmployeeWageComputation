@@ -4,23 +4,31 @@ isPresent=$((RANDOM%3))
 wage=20
 isFullTime=1
 isPartTime=2
-randcheck=$((RANDOM%3))
 wage=30
-# Case Statement
-case $randcheck in 
-	$isFullTime) 
-				echo "Employee is present"
-				emphrs=8
-					;;
-	$isPartTime) 
-				echo "Employee is working as part time"
-				emphrs=4
-					;;
-			*) 
-				echo "Employee is absent"
-				emphrs=0
-					;;
-esac 
+hrs=0
+totalSalary=0
+maxworkingday=20
 
-salary=$(($wage*$emphrs))
-echo "His Salary for the Day is: " $salary
+for (( days=1; days<=$maxworkingday; days++ ))
+do
+	randcheck=$((RANDOM%3))
+	case $randcheck in 
+		$isFullTime) 
+					
+					emphrs=8
+						;;
+		$isPartTime) 
+					
+					emphrs=4
+						;;
+		*) 
+					
+					emphrs=0
+						;;
+	esac 
+	hrs=$(($hrs+$emphrs))
+	salary=$(($wage*$emphrs))
+	totalSalary=$(($totalSalary+$salary))
+done
+echo "Hours Worked: " $hrs
+echo "Monthly Salary is: " $totalSalary

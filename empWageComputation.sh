@@ -37,7 +37,8 @@ do
 	totalWorkinghrs=$(($totalWorkinghrs+$emphrs))
 	salary=$(($wage*$emphrs))
 	totalSalary=$(($totalSalary+$salary))
-	
+	dailyWage[$totalWorkingdays]=$( getEmpWagePerDay $emphrs )
 done
 echo "Hours Worked: " $totalWorkinghrs
 echo "Monthly Salary is: " $totalSalary
+echo "Daily Wages: " ${dailyWage[@]}
